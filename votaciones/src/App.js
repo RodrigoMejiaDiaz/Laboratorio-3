@@ -1,25 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component,useState } from 'react'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+export default class App extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      good: 0, 
+      neutral: 0, 
+      bad: 0, 
+      all: 0, 
+      avr: 0, 
+      positive: 0}
+  }
+  render() {
+    return (
+      <div>
+        <h1>Give feedback</h1>
+        <button onClick={() => {
+          this.setState((state) => ({
+            good: state.good + 1
+          }))
+        }}>good</button>
+        <button>neutral</button>
+        <button>bad</button>
+        <h1>Statistics</h1>
+        <p>good: {this.state.good}</p>
+        <p>neutral: {this.state.neutral}</p>
+        <p>bad: {this.state.bad}</p>
+        <p>all: {this.state.all}</p>
+        <p>average: {this.state.avr}</p>
+      </div>
+    )
+  }
 }
 
-export default App;
