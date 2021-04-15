@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 import React, { Component,useState } from 'react'
 
 
@@ -16,11 +17,11 @@ export default class App extends Component {
     return (
       <div>
         <h1>Give feedback</h1>
-        <button onClick={() => {
-          this.setState((state) => ({
-            good: state.good + 1
+        <button onClick={() => 
+          this.setState(({
+            good: this.state.good + 1
           }))
-        }}>good</button>
+        }>good</button>
         <button>neutral</button>
         <button>bad</button>
         <h1>Statistics</h1>
