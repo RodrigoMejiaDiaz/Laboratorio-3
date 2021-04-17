@@ -1,18 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
-
+import Button from "./components/Button";
 const App = (props) => {
   var [selected, setSelected] = useState(0);
+  const [good, setGood] = useState(new Uint8Array(6));
 
   const handleButton = () => {
-    const a = Math.floor(Math.abs(0.6 - Math.random()) * 10);
-    setSelected((selected = a));
+    setSelected(Math.floor(Math.random() * anecdotes.length));
+  };
+
+  const upGood = () => {
+    const copy = { ...good };
+    copy[selected] += 1;
+    setGood(copy);
   };
 
   return (
     <div>
       <button onClick={handleButton}>Aleatory</button>
       <p>{props.anecdotes[selected]}</p>
+      <button onClick={upGood}>Good</button>
+      {good[selected]}
+      {console.log(good)}
     </div>
   );
 };
