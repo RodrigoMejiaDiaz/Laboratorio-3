@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom";
-import Button from "./components/Button";
+
 const App = (props) => {
-  var [selected, setSelected] = useState(0);
+  const [selected, setSelected] = useState(
+    Math.floor(Math.random() * anecdotes.length)
+  );
   const [good, setGood] = useState(new Uint8Array(6));
+  const [mostVoted, setMostVoted] = useState(0);
 
   const handleButton = () => {
     setSelected(Math.floor(Math.random() * anecdotes.length));
@@ -13,15 +16,20 @@ const App = (props) => {
     const copy = { ...good };
     copy[selected] += 1;
     setGood(copy);
+    if (good[selected] >= good[mostVoted]) {
+      setMostVoted(selected);
+    }
   };
 
   return (
     <div>
-      <button onClick={handleButton}>Aleatory</button>
+      <h2>Anécdota del día</h2>
       <p>{props.anecdotes[selected]}</p>
+      <p>has {good[selected]} votes</p>
       <button onClick={upGood}>Good</button>
-      {good[selected]}
-      {console.log(good)}
+      <button onClick={handleButton}>Next anecdote</button>
+      <h2>Anécnota con más votos</h2>
+      {props.anecdotes[mostVoted]}
     </div>
   );
 };
